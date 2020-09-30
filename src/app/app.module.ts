@@ -11,6 +11,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {UsuarioModule} from '../../../social/src/app/usuario/usuario.module';
+import {LayoutModule} from './layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import {UsuarioModule} from '../../../social/src/app/usuario/usuario.module';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
-    UsuarioModule
+    UsuarioModule,
+    LayoutModule
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
