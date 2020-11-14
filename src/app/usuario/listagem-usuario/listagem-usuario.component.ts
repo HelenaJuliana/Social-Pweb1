@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Usuario} from '../../shared/model/usuario';
+import {UsuarioService} from '../../shared/services/usuario.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-listagem-usuario',
@@ -7,14 +10,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListagemUsuarioComponent implements OnInit {
 
-  usuarios = [
-    {nome: 'Usuario 1', cpf: '123', idade: 30},
-    {nome: 'Usuario 2', cpf: '124', idade: 40},
-    {nome: 'Usuario 3', cpf: '125', idade: 32}
-  ];
-  constructor() { }
+  usuarios: Array<Usuario>;
+
+  constructor(private usuarioService: UsuarioService, private roteador: Router) {
+  }
 
   ngOnInit(): void {
+    this.usuarioService.listar().subscribe(
+      usuarios => this.usuarios = usuarios
+    );
+  }
+
+  editar(usuario: Usuario): void {
+    this.roteador.navigate(['cadastrarusuario', usuario.id]);
+  }
+
+  remover(usuario: Usuario): void {
+    this.usuarioService.remover(usuario.id).subscribe(
+      resposta => {
+        const indxUsuarioARemover = this.usuarios.findIndex(u => u.cpf === usuario.cpf);
+        if (indxUsuarioARemover > -1) {
+          this.usuarios.splice(indxUsuarioARemover, 1);
+        }
+      }
+    );
+
   }
 
 }

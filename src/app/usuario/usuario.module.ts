@@ -9,13 +9,17 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { ListagemUsuarioComponent } from './listagem-usuario/listagem-usuario.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {BrowserModule} from '@angular/platform-browser';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import { ListagemUsuarioTabelaComponent } from './listagem-usuario-tabela/listagem-usuario-tabela.component';
+import {MatTableModule} from '@angular/material/table';
+import {PipesModule} from '../shared/pipes/pipes.module';
 
 @NgModule({
-  declarations: [CadastroUsuarioComponent, ListagemUsuarioComponent],
+  declarations: [CadastroUsuarioComponent, ListagemUsuarioComponent, ListagemUsuarioTabelaComponent],
   exports: [
     CadastroUsuarioComponent,
-    ListagemUsuarioComponent
+    ListagemUsuarioComponent,
+    ListagemUsuarioTabelaComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -25,7 +29,10 @@ import {BrowserModule} from '@angular/platform-browser';
     MatFormFieldModule,
     FormsModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    FlexLayoutModule,
+    MatTableModule,
+    PipesModule
   ]
 })
 export class UsuarioModule { }
