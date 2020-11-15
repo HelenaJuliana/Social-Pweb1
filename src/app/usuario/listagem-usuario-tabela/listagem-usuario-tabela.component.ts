@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Usuario} from '../../shared/model/usuario';
 import {UsuarioService} from '../../shared/services/usuario.service';
 import {MatTableDataSource} from '@angular/material/table';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-listagem-usuario-tabela',
@@ -11,9 +12,10 @@ import {MatTableDataSource} from '@angular/material/table';
 export class ListagemUsuarioTabelaComponent implements OnInit {
 
   dataSource: MatTableDataSource<Usuario>;
-  mostrarColunas = ['nome', 'cpf', 'idade', 'acoes'];
+  mostrarColunas = ['nome', 'cpf', 'idade', 'telefone' , 'acoes'];
 
-  constructor(private usuarioService: UsuarioService) {
+
+  constructor(private usuarioService: UsuarioService, private roteador: Router) {
   }
 
   ngOnInit(): void {
@@ -22,8 +24,12 @@ export class ListagemUsuarioTabelaComponent implements OnInit {
     );
   }
 
+
   filtrar(texto: string): void {
     this.dataSource.filter = texto.trim().toLowerCase();
+  }
+  editar(usuario: Usuario): void {
+    this.roteador.navigate(['cadastrarusuario', usuario.id]);
   }
 
   apagar(id: number): void {

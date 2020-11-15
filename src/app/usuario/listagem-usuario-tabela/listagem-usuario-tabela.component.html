@@ -8,7 +8,7 @@
   <mat-row *matRowDef="let row; columns: mostrarColunas;"></mat-row>
   <ng-container matColumnDef="nome">
     <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
-    <mat-cell *matCellDef="let item">{{item.nome}}</mat-cell>
+    <mat-cell *matCellDef="let item">{{item.nome | titlecase }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="cpf">
@@ -21,11 +21,16 @@
     <mat-cell *matCellDef="let item">{{item.idade}}</mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="telefone">
+    <mat-header-cell *matHeaderCellDef>Telefone</mat-header-cell>
+    <mat-cell *matCellDef="let item">{{item.telefone | telefonePipe}}</mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="acoes">
     <mat-header-cell *matHeaderCellDef>Ações</mat-header-cell>
     <mat-cell *matCellDef="let item">
       <button mat-icon-button>
-        <mat-icon>edit</mat-icon>
+        <mat-icon (click)="editar(item.id)">edit</mat-icon>
       </button>
       <button mat-icon-button>
         <mat-icon (click)="apagar(item.id)">delete</mat-icon>
